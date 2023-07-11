@@ -1,0 +1,49 @@
+
+header{
+ 
+     width: 100%;
+     height: 10%;
+     background-color:white;
+     display: flex;
+     justify-content: space-between;
+     
+}
+#logo{
+
+     width: 30%;
+     height: 100%;
+     /* background-color: green; */
+}
+#nav-bar{
+    width: 50%;
+    height: 100%;
+    /* background-color:red; */
+}
+ul{
+    
+     display: flex;
+     /* justify-content: space-between; */
+     margin-left: 145px;
+     margin-right:3%;
+   
+}
+li{
+      margin-left: 15px;
+      list-style: none;
+    
+
+}
+
+button{
+     
+     width:100px;
+     height:40px;
+     border:transparent;
+     background-color: rgb(13, 13, 82);
+     color: white;
+     font-weight: 900;
+     font-size: 3vh;
+     font-family: sans-serif;
+     padding-bottom: 4px;
+     border-radius: 10px;
+}
