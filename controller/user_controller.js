@@ -86,13 +86,14 @@ module.exports.create = function(req,res){
 module.exports.sessionCreation = function(req,res){
       
    
-     
-      
+   return res.redirect('/');
 };
+      
+
 
 //creating the sign out function
 
 module.exports.SignOut = function(req,res){
- 
-}
-
+    
+   
+};
