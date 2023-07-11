@@ -86,50 +86,52 @@ module.exports.create = function(req,res){
 module.exports.sessionCreation = function(req,res){
       
    
-   //steps to authenticate
-   //find user
- User.findOne({email:req.body.email})
- .then((user)=>{
-   //handle user found 
-   if(user){
+//    //steps to authenticate
+//    //find user
+//  User.findOne({email:req.body.email})
+//  .then((user)=>{
+//    //handle user found 
+//    if(user){
 
-      //handle password doesn't match
-      if(user.password != req.body.password){
-          alert(" incorrect Password ")
-          return res.redirect('back');
-      }
-     //handle session creation
-     res.cookie('user_id',user.id);
-     return res.redirect('/user/profile');
+//       //handle password doesn't match
+//       if(user.password != req.body.password){
+//           alert(" incorrect Password ")
+//           return res.redirect('back');
+//       }
+//      //handle session creation
+//      res.cookie('user_id',user.id);
+//      return res.redirect('/user/profile');
      
-   }
-   else{
-       //handle user not found
-       alert("User not found..")
-       return res.redirect('back');
-   }
- })
- .catch((err)=>{
-   console.log('error in finding user in signing in',err);
-    return;
- })
+//    }
+//    else{
+//        //handle user not found
+//        alert("User not found..")
+//        return res.redirect('back');
+//    }
+//  })
+//  .catch((err)=>{
+//    console.log('error in finding user in signing in',err);
+//     return;
+//  })
       
-     
+      
+
+    //todo later
 }
 
 
 //creating the sign out function
 
-module.exports.SignOut = function(req,res){
+// module.exports.SignOut = function(req,res){
 
-   const userId = req.cookies.user_id;
+//    const userId = req.cookies.user_id;
 
-   //clear the user_id cookie
+//    //clear the user_id cookie
 
-   res.clearCookie('user_id');
+//    res.clearCookie('user_id');
 
-   //redirect the user to the login page
+//    //redirect the user to the login page
 
-   return res.redirect('login');
-}
+//    return res.redirect('login');
+// }
 
