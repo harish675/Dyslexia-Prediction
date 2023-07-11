@@ -1,9 +1,32 @@
 const User = require('../models/user');
 module.exports.profile = function(req,res){
+
+   //find the cookie
+   if(req.cookies.user_id){
+      console.log(req.cookies.user_id);
+      User.findById(req.cookies.user_id)
+      .then((user)=>{
+         console.log("*************************");
+         console.log(user);
+         return res.render('profile',{
+             title:'profile',
+             user:user
+      })
+   })
+   .catch((err)=>{
+
+         return res.redirect('user/login');
+      })
+   }
+   else{
+     return res.redirect('user/login');
+   }
+    
        
-     return res.render('profile',{
-        title:"Profile"
-     });
+   //   return res.render('profile',{
+   //      title:"Profile",
+   //      user:user
+   // //   });
 };
 
 
@@ -90,10 +113,23 @@ module.exports.sessionCreation = function(req,res){
    console.log('error in finding user in signing in',err);
     return;
  })
-  
-   
-  
       
      
+}
+
+
+//creating the sign out function
+
+module.exports.SignOut = function(req,res){
+
+   const userId = req.cookies.user_id;
+
+   //clear the user_id cookie
+
+   res.clearCookie('user_id');
+
+   //redirect the user to the login page
+
+   return res.redirect('login');
 }
 
