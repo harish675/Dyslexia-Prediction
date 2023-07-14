@@ -5,27 +5,58 @@
     </div>
     <div id="nav-bar">
     <ul>
-        <li>
-            <a href="">
-            <button type="button">Home</button>
-            </a>       
-        </li>
-        <li>
-            <a href="">
-            <button type="button">Quiz</button>
-            </a>
-            
-        </li>
-        <li>
-            <a href="">
-            <button type="button">Survey</button>
-            </a>            
-        </li>
-        <li>
-            <a href="">
-            <button type="button">Survey</button>
-            </a>  
-        </li>
+
+        <% if(locals.user){ %>
+
+            <li>
+                <a href="/user/profile"> <%= user.firstName %></a>
+            </li>
+               
+            <li>
+                <a href="/">
+               Home
+                </a>       
+            </li>
+            <li>
+                <a href="/">
+                  Quiz
+                </a>
+                
+            </li>
+            <li>
+                <a href="/">
+                   Survey
+                </a>            
+            </li>
+            <li>
+                <a href="/user/Sign-out">
+                    Sign-Out
+                </a>  
+            </li>
+              
+        <% }else{ %>
+        
+            <li>
+                <a href="/">
+                <button type="button">Home</button>
+                </a>       
+            </li>
+            <li>
+                <a href="/user/signup">
+                 Sign Up
+                </a>
+                
+            </li>
+
+            <li>
+                <a href="/user/login">
+                    Login
+                </a>
+                
+            </li>
+
+               
+        <% } %>
     </ul>
 </div>
     <!-- <p>This file Header</p> -->

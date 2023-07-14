@@ -10,6 +10,8 @@ const session = require('express-session');
 const passport = require('passport');
 const passportLocal= require('./config/passport-local-strategy');
 
+const MongoStore = require('connect-mongo');
+
 
 app.use(express.urlencoded());
 app.use(cookieParser());
@@ -23,8 +25,17 @@ app.set('views','./views');
 app.use(expressLayouts);
 
 
-//session-cookie use
 
+//create new instance of connect-mango and pass session object
+
+const store = MongoStore.create({
+   mongoUrl:'mongodb://127.0.0.1/Dyslexia_development',
+});
+//handle error from connect mongo
+store.on('error',function(err){
+  console.log('Error in connect-mango ',err);
+})
+//session-cookie use
 app.use(session({
    name:'dyslexia',
    //todo change the secret before deployment in production mode
@@ -33,11 +44,15 @@ app.use(session({
    resave:false,
    cookie :{
      maxAge :(1000*60*100),
-   }
+   },
+   store:store,
+
    
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(passport.setAuthenticatedUser);
+
 app.use('/',require('./router'));
 app.listen(port,function(err){
     

@@ -1,37 +1,18 @@
 const User = require('../models/user');
 module.exports.profile = function(req,res){
-
-   //find the cookie
-   if(req.cookies.user_id){
-      console.log(req.cookies.user_id);
-      User.findById(req.cookies.user_id)
-      .then((user)=>{
-         console.log("*************************");
-         console.log(user);
-         return res.render('profile',{
-             title:'profile',
-             user:user
-      })
-   })
-   .catch((err)=>{
-
-         return res.redirect('user/login');
-      })
-   }
-   else{
-     return res.redirect('user/login');
-   }
-    
-       
-   //   return res.render('profile',{
-   //      title:"Profile",
-   //      user:user
-   // //   });
+     
+   return res.render('profile',{
+        title:"Profile",
+      });
 };
 
 
 //create controller for signup page
 module.exports.SignUp = function(req,res){
+
+   if(req.isAuthenticated()){
+       return res.redirect('/user/profile');
+    }
 
     return res.render('sign_up',{
       title :"Sign-Up",
@@ -42,6 +23,10 @@ module.exports.SignUp = function(req,res){
 //create controller for the login page 
 
 module.exports.logIn = function(req,res){
+
+   if(req.isAuthenticated()){
+      return res.redirect('/user/profile');
+    }
 
    return res.render('login_page',{
         title:"login-page",
@@ -84,7 +69,6 @@ module.exports.create = function(req,res){
 
 //create session for user login
 module.exports.sessionCreation = function(req,res){
-      
    
    return res.redirect('/');
 };
@@ -93,7 +77,14 @@ module.exports.sessionCreation = function(req,res){
 
 //creating the sign out function
 
-module.exports.SignOut = function(req,res){
-    
+module.exports.SignOut = function(req,res,next){
+     
+     req.logout(function(err){
+           if(err){
+             return next(err);
+           }
+
+           return res.redirect('/');
+     });
    
 };
